@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Insert a sample user with hashed password ("password123")
 INSERT INTO users (username, password)
-VALUES ('bob', '$2a$10$7ERkPjoJ/1yrT8N3g0u4aOQvXnKk5/Fe5hTnRVkxX.ZmUk2mbn7XG')
+VALUES ('sadiq', '$2b$10$tMsJs6v1o7Hf/mkFYT5SvuXR2m.blJ1aEK9ctZuETCHHRb8n/bB8G')
 ON CONFLICT (username) DO NOTHING;
