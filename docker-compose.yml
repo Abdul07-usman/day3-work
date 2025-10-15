@@ -1,34 +1,31 @@
-#version: "3.9"
-
 services:
   db:
     image: postgres:15-alpine
     environment:
-      POSTGRES_USER: myuser
+      POSTGRES_USER: nimcuser
       POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
+      POSTGRES_DB: nimcdb
     volumes:
       - ./database/db-init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
-
+      # This is my backend service
   backend:
     build: ./backend
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
-      POSTGRES_HOST: db
+      POSTGRES_USER: nimcuser
+      POSTGRE_PASSWORD: mypassword
+      POSTGRES_DB: nimcdb
     ports:
-      - "5000:5000"
+      - "5000:5000" # this is just backend port
     depends_on:
       - db
-
+      # This is my frontend service
   frontend:
     build: ./frontend
     ports:
       - "3000:3000"
     environment:
-      REACT_APP_API_URL: http://backend:5000
+      REACT_APP_API_URL: http://localhost:5000
     depends_on:
-      - backend
+      - backend:
